@@ -1,6 +1,8 @@
-package chess;
+package chess.board;
 
-public record Position(
+import java.util.Comparator;
+
+public record Position (
         Column column,
         Row row
 ) {
