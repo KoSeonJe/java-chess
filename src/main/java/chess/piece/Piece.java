@@ -14,12 +14,16 @@ public abstract class Piece {
         this.pieceType = pieceType;
     }
 
-    public abstract void move();
-
     public abstract boolean isMovable(Position startPoint, Position destination);
 
-    public boolean isEqualColor(Color color) {
-        return this.color == color;
+    public abstract List<Position> createAllPaths(Position startPoint, Position destination);
+
+    public boolean canJumpOver() {
+        return false;
+    };
+
+    public boolean isEqualColor(Piece other) {
+        return this.color == other.color;
     }
 
     public boolean isGameStopIfDie(){
@@ -33,8 +37,4 @@ public abstract class Piece {
     public PieceType getPieceType() {
         return pieceType;
     }
-
-    public abstract List<Position> createAllPaths(Position startPoint, Position destination);
-
-    public abstract boolean canArrive(List<Piece> pathPieces);
 }

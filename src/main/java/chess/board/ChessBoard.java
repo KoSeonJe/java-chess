@@ -32,17 +32,17 @@ public class ChessBoard {
 
         List<Position> paths = startPiece.createAllPaths(startPoint, destination); // 목표 위치 제외
         List<Piece> pathPieces = extractPathPieces(paths);
-        if (!startPiece.canArrive(pathPieces)) {
-            throw new IllegalArgumentException("[ERROR] 해당 기물은 목표 위치로 움직일 수 없습니다");
+        if (!startPiece.canJumpOver() && !pathPieces.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 경로에 기물이 있어 목표 위치로 움직일 수 없습니다");
         }
 
         Piece destinationPiece = pieces.get(destination);
-        if (destinationPiece.isGameStopIfDie()) {
-            return false;
+        if (startPiece.isEqualColor(destinationPiece)) {
+            throw new IllegalArgumentException("[ERROR] 목적지에 같은 색의 기물이 위치해 있어 움직일 수 없습니다");
         }
-
         pieces.put(destination, startPiece);
-        return true;
+
+        return destinationPiece.isGameStopIfDie();
     }
 
     private List<Piece> extractPathPieces(List<Position> paths) {
