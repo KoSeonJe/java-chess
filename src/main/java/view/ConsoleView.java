@@ -28,12 +28,12 @@ public class ConsoleView {
 
         StringBuilder builder = new StringBuilder();
         Position printPosition = positions.getFirst();
-        builder.append(printPosition.row().ordinal()).append(" ");
+        builder.append(printPosition.row().ordinal() + 1).append(" ");
 
         for (Position position : positions) {
             Piece piece = filledPieces.get(position);
             if (printPosition.row() != position.row()) {
-                builder.append("\n").append(position.row().ordinal()).append(" ");
+                builder.append("\n").append(position.row().ordinal() + 1).append(" ");
                 printPosition = position;
             }
             if (piece == null) {
@@ -53,7 +53,7 @@ public class ConsoleView {
     }
 
     public Position requestStartPoint() {
-        System.out.println("시작 좌표를 입력해주세요(ex)x,y\n");
+        System.out.println("시작 좌표를 입력해주세요(ex)x,y");
         String[] inputParts = SCANNER.nextLine().split(",");
         Column column = Column.valueOf(inputParts[0]);
         Row row = Row.findByValue(Integer.parseInt(inputParts[1]));
@@ -61,7 +61,7 @@ public class ConsoleView {
     }
 
     public Position requestDestination() {
-        System.out.println("목표 좌표를 입력해주세요(ex)x,y\n");
+        System.out.println("목표 좌표를 입력해주세요(ex)x,y");
         String[] inputParts = SCANNER.nextLine().split(",");
         Column column = Column.valueOf(inputParts[0]);
         Row row = Row.findByValue(Integer.parseInt(inputParts[1]));

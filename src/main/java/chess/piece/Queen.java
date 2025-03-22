@@ -19,9 +19,4 @@ public class Queen extends Piece {
     public List<Position> createAllPaths(Position startPoint, Position destination) {
         return List.of();
     }
-
-    @Override
-    public boolean isGameStopIfDie() {
-        return false;
-    }
 }
