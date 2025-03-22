@@ -1,6 +1,7 @@
 package chess.piece;
 
 import chess.Color;
+import chess.board.BoardVector;
 import chess.board.Position;
 import java.util.List;
 
@@ -12,7 +13,10 @@ public class King extends Piece {
 
     @Override
     public boolean isMovable(Position startPoint, Position destination) {
-        return false;
+        BoardVector boardVector = BoardVector.createVector(startPoint, destination);
+        int absDx = boardVector.getAbsDx();
+        int absDy = boardVector.getAbsDy();
+        return (absDx + absDy) == 1 || (absDx == 1 && absDy == 1);
     }
 
     @Override
