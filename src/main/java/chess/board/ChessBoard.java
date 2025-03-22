@@ -9,6 +9,7 @@ import chess.piece.Piece;
 import chess.piece.Queen;
 import chess.piece.Rook;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChessBoard {
@@ -19,12 +20,36 @@ public class ChessBoard {
         this.pieces = pieces;
     }
 
-    public void move() {
+    public boolean move(Position startPoint, Position destination) {
+        if (!pieces.containsKey(startPoint)) {
+            throw new IllegalArgumentException("[ERROR] 해당 위치에 기물이 없습니다");
+        }
 
+        Piece startPiece = pieces.get(startPoint);
+        if (!startPiece.isMovable(startPoint, destination)) {
+            throw new IllegalArgumentException("[ERROR] 해당 기물은 목표 위치로 움직일 수 없습니다");
+        }
+
+        List<Position> paths = startPiece.createAllPaths(startPoint, destination); // 목표 위치 제외
+        List<Piece> pathPieces = extractPathPieces(paths);
+        if (!startPiece.canArrive(pathPieces)) {
+            throw new IllegalArgumentException("[ERROR] 해당 기물은 목표 위치로 움직일 수 없습니다");
+        }
+
+        Piece destinationPiece = pieces.get(destination);
+        if (destinationPiece.isGameStopIfDie()) {
+            return false;
+        }
+
+        pieces.put(destination, startPiece);
+        return true;
     }
 
-    public Map<Position, Piece> getPieces() {
-        return pieces;
+    private List<Piece> extractPathPieces(List<Position> paths) {
+        return paths.stream()
+                .filter(pieces::containsKey)
+                .map(pieces::get)
+                .toList();
     }
 
     public static ChessBoard initialize() {
@@ -63,5 +88,9 @@ public class ChessBoard {
         initialPieces.put(new Position(Row.SEVEN, Column.G), new Pawn(Color.BLACK));
         initialPieces.put(new Position(Row.SEVEN, Column.H), new Pawn(Color.BLACK));
         return new ChessBoard(initialPieces);
+    }
+
+    public Map<Position, Piece> getPieces() {
+        return pieces;
     }
 }

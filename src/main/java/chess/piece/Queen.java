@@ -1,6 +1,7 @@
 package chess.piece;
 
 import chess.Color;
+import chess.board.Position;
 
 public class Queen extends Piece {
 
@@ -14,7 +15,12 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean gameStopIfDie() {
+    public boolean isMovable(Position startPoint, Position destination) {
+        return false;
+    }
+
+    @Override
+    public boolean isGameStopIfDie() {
         return false;
     }
 }

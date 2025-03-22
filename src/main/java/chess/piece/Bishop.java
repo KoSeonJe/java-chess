@@ -1,6 +1,7 @@
 package chess.piece;
 
 import chess.Color;
+import chess.board.Position;
 
 public class Bishop extends Piece{
 
@@ -14,7 +15,7 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public String toString() {
-        return "B";
+    public boolean isMovable(Position startPoint, Position destination) {
+        return false;
     }
 }

@@ -16,13 +16,19 @@ public class ChessGame {
 
     public void start() {
         Turn currentTurn = Turn.getStartingTurn();
-        consoleView.printBoard(chessBoard.getPieces());
-        consoleView.printTurn(currentTurn);
-        Position startPoint = consoleView.requestStartPoint();
-        Position destination = consoleView.requestDestination();
-        while (true) {
+        boolean isRunning = true;
+        while (isRunning) {
+            try {
+                consoleView.printBoard(chessBoard.getPieces());
+                consoleView.printTurn(currentTurn);
+                Position startPoint = consoleView.requestStartPoint();
+                Position destination = consoleView.requestDestination();
 
-            currentTurn = currentTurn.changeTurn();
+                isRunning = chessBoard.move(startPoint, destination);
+                currentTurn = currentTurn.changeTurn();
+            } catch (RuntimeException e) {
+                consoleView.printMessage(e.getMessage());
+            }
         }
     }
 }

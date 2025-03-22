@@ -67,4 +67,8 @@ public class ConsoleView {
         Row row = Row.findByValue(Integer.parseInt(inputParts[1]));
         return new Position(column, row);
     }
+
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
 }
