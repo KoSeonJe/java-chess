@@ -1,6 +1,8 @@
 package chess.board;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
 public record Position (
         Column column,
@@ -150,6 +152,14 @@ public record Position (
         return moveVertical(movement.y()).moveHorizontal(movement.x());
     }
 
+    public Position move(final List<Movement> movements) {
+        Position position = this;
+        for (Movement movement : movements) {
+            position = moveVertical(movement.y()).moveHorizontal(movement.x());
+        }
+        return position;
+    }
+
     public Position moveVertical(final int step) {
         if (step > 0) {
             return moveUp(step);
@@ -168,5 +178,21 @@ public record Position (
             return moveLeft(-step);
         }
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Position position)) {
+            return false;
+        }
+        return row == position.row && column == position.column;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(column, row);
     }
 }
