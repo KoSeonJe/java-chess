@@ -34,4 +34,8 @@ public record BoardVector(
     public boolean isFourQuadrant() {
         return dx > 0 && dy < 0;
     }
+
+    public boolean isDxZero() {
+        return dx == 0;
+    }
 }
