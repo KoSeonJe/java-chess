@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Pawn extends Piece {
 
+    private boolean isMoved;
+
     public Pawn(Color color) {
         super(color, PieceType.PAWN);
     }
@@ -15,10 +17,18 @@ public class Pawn extends Piece {
     public boolean isMovable(Position startPoint, Position destination) {
         BoardVector boardVector = BoardVector.createVector(startPoint, destination);
         if (color == Color.BLACK) {
+            if (!isMoved) {
+                isMoved = true;
+                return boardVector.dy() == -2 && boardVector.dx() == 0;
+            }
             return boardVector.dy() == -1 && boardVector.dx() == 0;
         }
 
         if (color == Color.WHITE) {
+            if (!isMoved) {
+                isMoved = true;
+                return boardVector.dy() == 2 && boardVector.dx() == 0;
+            }
             return boardVector.dy() == 1 && boardVector.dx() == 0;
         }
 
