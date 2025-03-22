@@ -1,5 +1,15 @@
 package chess.piece;
 
-public class Knight {
+import chess.Color;
 
+public class Knight extends Piece {
+
+    public Knight(Color color) {
+        super(color, PieceType.KNIGHT);
+    }
+
+    @Override
+    public void move() {
+
+    }
 }

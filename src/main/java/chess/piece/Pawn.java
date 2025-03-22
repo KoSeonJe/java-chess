@@ -1,5 +1,15 @@
 package chess.piece;
 
-public class Pawn {
+import chess.Color;
 
+public class Pawn extends Piece {
+
+    public Pawn(Color color) {
+        super(color, PieceType.PAWN);
+    }
+
+    @Override
+    public void move() {
+
+    }
 }
