@@ -15,14 +15,15 @@ public class Bishop extends Piece{
     @Override
     public boolean isMovable(Position startPoint, Position destination) {
         BoardVector boardVector = BoardVector.createVector(startPoint, destination);
-        return boardVector.getAbsDx() == boardVector.getAbsDy();
+        int absDx = boardVector.getAbsDx();
+        int absDy = boardVector.getAbsDy();
+        return absDx == absDy;
     }
 
     @Override
     public List<Position> createAllPaths(Position startPoint, Position destination) {
-        List<Position> paths = new ArrayList<>();
-
         BoardVector boardVector = BoardVector.createVector(startPoint, destination);
+        List<Position> paths = new ArrayList<>();
         Position path = startPoint;
         if (boardVector.isOneQuadrant()) {
             for (int i = 0; i < boardVector.dx() - 1; i++) {
@@ -48,7 +49,6 @@ public class Bishop extends Piece{
                 paths.add(path);
             }
         }
-
         return paths;
     }
 }
