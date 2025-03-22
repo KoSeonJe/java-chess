@@ -1,5 +1,8 @@
 package chess.board;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public enum Column {
 
     A,

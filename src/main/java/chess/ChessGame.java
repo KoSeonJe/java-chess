@@ -1,6 +1,7 @@
 package chess;
 
 import chess.board.ChessBoard;
+import chess.board.Position;
 import view.ConsoleView;
 
 public class ChessGame {
@@ -16,7 +17,9 @@ public class ChessGame {
     public void start() {
         Turn currentTurn = Turn.getStartingTurn();
         consoleView.printBoard(chessBoard.getPieces());
-
+        consoleView.printTurn(currentTurn);
+        Position startPoint = consoleView.requestStartPoint();
+        Position destination = consoleView.requestDestination();
         while (true) {
 
             currentTurn = currentTurn.changeTurn();

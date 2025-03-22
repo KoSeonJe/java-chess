@@ -4,6 +4,7 @@ import static chess.Color.*;
 import static chess.piece.PieceType.*;
 
 import chess.Color;
+import chess.Turn;
 import chess.board.Column;
 import chess.board.Position;
 import chess.board.Row;
@@ -49,5 +50,12 @@ public class OutputSupporter {
         PieceType pieceType = piece.getPieceType();
         Color color = piece.getColor();
         return COLOR_FORMATTER.get(color) + PIECE_TYPE_FORMATTER.get(pieceType);
+    }
+
+    public String formatTurn(Turn currentTurn) {
+        if (currentTurn == Turn.BLACK_TURN) {
+            return "흑색";
+        }
+        return "백색";
     }
 }
