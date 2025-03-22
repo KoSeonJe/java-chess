@@ -20,14 +20,6 @@ public class OutputSupporter {
     private static final Map<Color, String> COLOR_FORMATTER = new HashMap<>();
 
     static {
-        for (Row row : Row.values()) {
-            for (Column column : Column.values()) {
-                EMPTY_PIECES.put(new Position(row, column), null);
-            }
-        }
-    }
-
-    static {
         PIECE_TYPE_FORMATTER.put(KING, "K");
         PIECE_TYPE_FORMATTER.put(ROOK, "R");
         PIECE_TYPE_FORMATTER.put(BISHOP, "B");
@@ -42,6 +34,11 @@ public class OutputSupporter {
     }
 
     public Map<Position, Piece> fillBoard(Map<Position, Piece> boardPieces) {
+        for (Row row : Row.values()) {
+            for (Column column : Column.values()) {
+                EMPTY_PIECES.put(new Position(row, column), null);
+            }
+        }
         EMPTY_PIECES.putAll(boardPieces);
         return EMPTY_PIECES;
     }

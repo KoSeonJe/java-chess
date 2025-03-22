@@ -36,13 +36,22 @@ public class ChessBoard {
             throw new IllegalArgumentException("[ERROR] 경로에 기물이 있어 목표 위치로 움직일 수 없습니다");
         }
 
+        if (pieces.containsKey(destination)) {
+            Piece destinationPiece = pieces.get(destination);
+            validateColor(destination, startPiece);
+            return destinationPiece.isGameStopIfDie();
+        }
+
+        pieces.put(destination, startPiece);
+        pieces.remove(startPoint);
+        return true;
+    }
+
+    private void validateColor(Position destination, Piece startPiece) {
         Piece destinationPiece = pieces.get(destination);
         if (startPiece.isEqualColor(destinationPiece)) {
             throw new IllegalArgumentException("[ERROR] 목적지에 같은 색의 기물이 위치해 있어 움직일 수 없습니다");
         }
-        pieces.put(destination, startPiece);
-
-        return destinationPiece.isGameStopIfDie();
     }
 
     private List<Piece> extractPathPieces(List<Position> paths) {

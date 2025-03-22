@@ -28,12 +28,12 @@ public class ConsoleView {
 
         StringBuilder builder = new StringBuilder();
         Position printPosition = positions.getFirst();
-        builder.append(printPosition.row().ordinal() + 1).append(" ");
+        builder.append(printPosition.row().getValue()).append(" ");
 
         for (Position position : positions) {
             Piece piece = filledPieces.get(position);
             if (printPosition.row() != position.row()) {
-                builder.append("\n").append(position.row().ordinal() + 1).append(" ");
+                builder.append("\n").append(position.row().getValue()).append(" ");
                 printPosition = position;
             }
             if (piece == null) {
@@ -52,7 +52,7 @@ public class ConsoleView {
         System.out.printf("%s 차례입니다\n", formattedTurn);
     }
 
-    public Position requestStartPoint() {
+    public Position  requestStartPoint() {
         System.out.println("시작 좌표를 입력해주세요(ex)x,y");
         String[] inputParts = SCANNER.nextLine().split(",");
         Column column = Column.valueOf(inputParts[0]);

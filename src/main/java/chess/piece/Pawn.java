@@ -15,11 +15,11 @@ public class Pawn extends Piece {
     public boolean isMovable(Position startPoint, Position destination) {
         BoardVector boardVector = BoardVector.createVector(startPoint, destination);
         if (color == Color.BLACK) {
-            return boardVector.getAbsDy() == -1 && boardVector.getAbsDx() == 0;
+            return boardVector.dy() == -1 && boardVector.dx() == 0;
         }
 
         if (color == Color.WHITE) {
-            return boardVector.getAbsDy() == 1 && boardVector.getAbsDx() == 0;
+            return boardVector.dy() == 1 && boardVector.dx() == 0;
         }
 
         throw new IllegalStateException("[ERROR] 현재 기물의 색이 정해져있지 않습니다");

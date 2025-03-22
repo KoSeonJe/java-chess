@@ -19,6 +19,10 @@ public enum Row {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public boolean isTop() {
         return ordinal() == 0;
     }

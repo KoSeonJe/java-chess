@@ -16,15 +16,15 @@ public class ChessGame {
 
     public void start() {
         Turn currentTurn = Turn.getStartingTurn();
-        boolean isRunning = true;
-        while (isRunning) {
+        boolean isGameStop = false;
+        while (!isGameStop) {
             try {
                 consoleView.printBoard(chessBoard.getPieces());
                 consoleView.printTurn(currentTurn);
                 Position startPoint = consoleView.requestStartPoint();
                 Position destination = consoleView.requestDestination();
 
-                isRunning = chessBoard.move(startPoint, destination);
+                isGameStop = chessBoard.move(startPoint, destination);
                 currentTurn = currentTurn.changeTurn();
             } catch (RuntimeException e) {
                 consoleView.printMessage(e.getMessage());

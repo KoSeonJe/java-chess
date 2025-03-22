@@ -15,7 +15,7 @@ public record BoardVector(
 
     public static BoardVector createVector(Position start, Position end) {
         int dx = end.column().ordinal() - start.column().ordinal();
-        int dy = end.row().ordinal() - start.row().ordinal();
+        int dy = end.row().getValue() - start.row().getValue();
         return new BoardVector(dx, dy);
     }
 
